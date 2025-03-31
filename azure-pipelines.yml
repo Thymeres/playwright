@@ -16,6 +16,6 @@ steps:
 
   - script: |
     echo "Starting Docker container..."
-    docker run --rm playwright_docker npx playwright test --reporter=list || echo "Playwright tests failed!"
+    docker run --rm playwright_docker npx playwright test --reporter=list
     echo "Docker run completed."
   displayName: 'Run Playwright Tests in Docker with Logs'
