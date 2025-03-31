@@ -16,6 +16,6 @@ steps:
 
   - script: |
       echo "container start"
-      docker run --rm playwright_docker --reporter=list
+      docker run --rm playwright_docker npx playwright test --reporter=list
       echo "container succeeded"
     displayName: 'Run Playwright Tests in Docker'
