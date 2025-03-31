@@ -11,10 +11,12 @@ steps:
 
   - script: |
       docker build -t playwright_docker -f ./dockerfile .
+      echo "image built"
     displayName: 'Build Docker Image'
 
   - script: |
       docker run --rm playwright_docker
+      echo "container ran successfully"
     displayName: 'Run Playwright Tests in Docker'
 
   - task: PublishBuildArtifacts@1
