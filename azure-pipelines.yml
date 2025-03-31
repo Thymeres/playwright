@@ -2,7 +2,7 @@ trigger:
  - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 steps:
   - checkout: self
@@ -16,6 +16,6 @@ steps:
 
   - script: |
       echo "container start"
-      docker run --rm playwright_docker npx playwright test --reporter=list
+      docker run --rm playwright_docker
       echo "container succeeded"
     displayName: 'Run Playwright Tests in Docker'
