@@ -19,3 +19,9 @@ steps:
       docker run playwright_docker
       echo "container succeeded"
     displayName: 'Run Playwright Tests in Docker'
+    
+  - task: PublishBuildArtifacts@1
+    condition: failed()  # Run only if the tests fail
+    inputs:
+      pathToPublish: 'playwright-report'
+      artifactName: 'Test Results'
