@@ -9,16 +9,13 @@ steps:
     persistCredentials: true
     clean: true
 
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '20.x'
-    displayName: 'Setup Node.js'
+  - script: |
+      docker build -t playwright_docker -f ./dockerfile .
+    displayName: 'Build Docker Image'
 
   - script: |
-      npm ci
-      npx playwright install --with-deps
-      npx playwright test
-    displayName: 'Install Dependencies and Run Playwright Tests'
+      docker run --rm playwright_docker
+    displayName: 'Run Playwright Tests in Docker'
 
   - task: PublishBuildArtifacts@1
     condition: failed()  # Run only if the tests fail

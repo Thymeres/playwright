@@ -10,7 +10,7 @@ RUN npx playwright install --with-deps
 
 COPY . .
 
-ENV PWDEBUG=0
+ENV HEADLESS=false
 ENV PORT=9000
 
 EXPOSE 9000
