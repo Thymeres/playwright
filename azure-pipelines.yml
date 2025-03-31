@@ -1,0 +1,26 @@
+trigger:
+ - master
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+  # Step 1: Checkout Code
+  - task: Checkout@1
+
+  # Step 2: Install Node.js
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.x'
+
+  - script: |
+      npm ci
+      npx playwright install --with-deps
+      npx playwright test
+    displayName: 'Install dependencies and run Playwright tests'
+
+  - task: PublishBuildArtifacts@1
+    condition: failed()  # Runs only if the tests fail
+    inputs:
+      pathToPublish: 'playwright-report'
+      artifactName: 'Test Results'
