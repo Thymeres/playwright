@@ -16,12 +16,6 @@ steps:
 
   - script: |
       echo "starting docker container"
-      docker run --rm playwright_docker npx playwright test
+      docker run --rm playwright_docker
       echo "container ran successfully"
     displayName: 'Run Playwright Tests in Docker'
-
-  - task: PublishBuildArtifacts@1
-    condition: failed()  # Run only if the tests fail
-    inputs:
-      pathToPublish: 'playwright-report'
-      artifactName: 'Test Results'
