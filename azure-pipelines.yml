@@ -7,20 +7,24 @@ pool:
 steps:
   # Step 1: Checkout Code
   - task: Checkout@1
+    displayName: 'Checkout Code'
 
   # Step 2: Install Node.js
   - task: NodeTool@0
     inputs:
       versionSpec: '20.x'
+    displayName: 'Setup Node.js'
 
+  # Step 3: Install Dependencies and Run Playwright Tests
   - script: |
       npm ci
       npx playwright install --with-deps
       npx playwright test
-    displayName: 'Install dependencies and run Playwright tests'
+    displayName: 'Install Dependencies and Run Playwright Tests'
 
+  # Step 4: Publish Playwright Artifacts (Screenshots, Videos, etc.)
   - task: PublishBuildArtifacts@1
-    condition: failed()  # Runs only if the tests fail
+    condition: failed()  # Run this only if the tests fail
     inputs:
-      pathToPublish: 'playwright-report'
+      pathToPublish: 'playwright-report'  # Customize this based on your Playwright config
       artifactName: 'Test Results'
