@@ -15,7 +15,8 @@ steps:
     displayName: 'Build Docker Image'
 
   - script: |
-      docker run --rm playwright_docker
+      echo "starting docker container"
+      docker run --rm playwright_docker npx playwright test
       echo "container ran successfully"
     displayName: 'Run Playwright Tests in Docker'
 
